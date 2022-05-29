@@ -1,23 +1,22 @@
 import 'source-map-support/register'
-// import * as AWS from 'aws-sdk'
-// import * as AWSXRay from 'aws-xray-sdk'
-// import { DocumentClient } from 'aws-sdk/clients/dynamodb'
-// import { createLogger } from '../utils/logger'
+import { createLogger } from '../utils/logger'
 import { TodoItem } from '../models/TodoItem'
-// import { TodoUpdate } from '../models/TodoUpdate';
+import { TodoUpdate } from '../models/TodoUpdate';
 
 import * as AWS from 'aws-sdk';
 // import {Todo} from "../../../client/src/types/Todo";
-// import * as AWSXRay from 'aws-xray-sdk'
+import * as AWSXRay from 'aws-xray-sdk'
 
-// const XAWS = AWSXRay.captureAWS(AWS)
-const XAWS = AWS
+let XAWS = AWS;
+if (!process.env.LOCAL) {
+    XAWS = AWSXRay.captureAWS(AWS)
+}
 
 const docClient = new XAWS.DynamoDB.DocumentClient()
 
-// const logger = createLogger('TodosAccess')
+const logger = createLogger('TodosAccess')
 
-// TODO: Implement the dataLayer logic
+// DONE: Implement the dataLayer logic
 export class TodosAccess {
 
     constructor(
@@ -65,12 +64,12 @@ export class TodosAccess {
         return todo as TodoItem
     }
 
-    async updateTodo(updatedTodo, todoId: string, userId: string): Promise<String> {
+    async updateTodo(updatedTodo: TodoUpdate, todoId: string, userId: string): Promise<String> {
         const params = {
             TableName: this.todosTable,
             Key: {
-                userId,
-                todoId
+                userId: userId,
+                todoId: todoId
             },
             UpdateExpression: "set #name = :n, dueDate = :due, done = :d",
             ExpressionAttributeValues: {
@@ -86,7 +85,9 @@ export class TodosAccess {
 
         await docClient.update(params).promise()
 
-        return todoId
+        logger.info(`Todo updated ${todoId} by user ${userId}`)
+
+        return
     }
 
     async deleteTodo(todoId: string, userId: string) {
@@ -98,7 +99,11 @@ export class TodosAccess {
             }
         }
 
-        return await docClient.delete(params).promise()
+        await docClient.delete(params).promise()
+
+        logger.info(`Todo deleted ${todoId} by user ${userId}`)
+
+        return
     }
 }
 

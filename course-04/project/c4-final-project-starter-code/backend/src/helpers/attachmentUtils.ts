@@ -1,10 +1,12 @@
 import * as AWS from 'aws-sdk'
-// import * as AWSXRay from 'aws-xray-sdk'
+import * as AWSXRay from 'aws-xray-sdk'
 
-// const XAWS = AWSXRay.captureAWS(AWS)
-const XAWS = AWS
+let XAWS = AWS;
+if (!process.env.LOCAL) {
+    XAWS = AWSXRay.captureAWS(AWS)
+}
 
-// TODO: Implement the fileStore logic
+// DONE: Implement the fileStore logic
 
 export default class FileStore {
     constructor(
