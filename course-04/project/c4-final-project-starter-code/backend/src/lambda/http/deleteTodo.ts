@@ -9,16 +9,14 @@ import { getUserId } from '../utils'
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    const todoId = event.pathParameters.todoId
-    // TODO: Remove a TODO item by id
+    // DONE: Remove a TODO item by id
     const userId = getUserId(event)
+    const todoId = event.pathParameters.todoId
     const response = await deleteTodo(todoId, userId)
     return {
       statusCode: 200,
       body: response
     }
-
-    return undefined
   }
 )
 
