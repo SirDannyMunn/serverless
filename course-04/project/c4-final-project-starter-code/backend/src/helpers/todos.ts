@@ -1,17 +1,16 @@
-//@ts-nocheck
-// @danny TODO - remove
 import { TodosAccess } from './todosAcess'
 import FileStore from './attachmentUtils';
 // import { TodoItem } from '../models/TodoItem'
+// import * as createError from 'http-errors'
 import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
-// import { createLogger } from '../utils/logger'
+import { createLogger } from '../utils/logger'
 import * as uuid from 'uuid'
-// import * as createError from 'http-errors'
 
-// TODO: Implement businessLogic
+// DONE: Implement businessLogic
+const logger = createLogger('createTodo')
 
-let bucketName = process.env.ATTACHMENT_S3_BUCKET
+const bucketName = process.env.ATTACHMENT_S3_BUCKET
 
 async function getTodosForUser(userId: string) {
 
@@ -35,17 +34,13 @@ async function createTodo(request: CreateTodoRequest, userId) {
     }
 
     const todo = await (new TodosAccess).createTodo(newItem)
-
-    if (request.attachmentUrl) {
-        newItem["attachmentUrl"] = (new FileStore).getPresignedUrl(itemId)
-    }
-
-    return newItem
+    return todo
 }
 
-async function updateTodo(request: UpdateTodoRequest, userId) {
 
-    await (new TodosAccess).updateTodo(request, request.todoId, userId)
+async function updateTodo(request: UpdateTodoRequest, todoId, userId) {
+
+    await (new TodosAccess).updateTodo(request, todoId, userId)
 
     return ""
 }
@@ -59,12 +54,14 @@ async function deleteTodo(todoId, userId) {
 
 async function createAttachmentPresignedUrl(todoId, userId) {
 
-    const todo = await (new TodosAccess).getTodo(request.todoId)
+    const todo = await (new TodosAccess).getTodo(todoId)
     if (todo.userId !== userId) {
         throw new Error("User not authorized")
     }
 
-    const uploadUrl = (new FileStore).getPresignedUrl(request.todoId)
+    const uploadUrl = (new FileStore).getPresignedUrl(todoId)
+
+    logger.info(`Pre-signed URL created: ${uploadUrl}`)
 
     return {
         "uploadUrl": uploadUrl
