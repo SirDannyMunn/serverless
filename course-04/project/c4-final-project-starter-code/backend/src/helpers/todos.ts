@@ -8,7 +8,7 @@ import { createLogger } from '../utils/logger'
 import * as uuid from 'uuid'
 
 // DONE: Implement businessLogic
-const logger = createLogger('createTodo')
+const logger = createLogger('Todo Logic Layer')
 
 const bucketName = process.env.ATTACHMENT_S3_BUCKET
 
@@ -40,12 +40,16 @@ async function createTodo(request: CreateTodoRequest, userId) {
 
 async function updateTodo(request: UpdateTodoRequest, todoId, userId) {
 
+    logger.info("Updating todo helpers/todo", {todoId,userId})
+
     await (new TodosAccess).updateTodo(request, todoId, userId)
 
     return ""
 }
 
 async function deleteTodo(todoId, userId) {
+
+    logger.info("Deleting todo helpers/todo", {todoId,userId})
 
     await (new TodosAccess).deleteTodo(todoId, userId)
 

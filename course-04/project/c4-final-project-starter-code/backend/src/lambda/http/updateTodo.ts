@@ -8,10 +8,15 @@ import { updateTodo } from '../../helpers/todos'
 import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import { getUserId } from '../utils'
 
+import { createLogger } from '../../utils/logger'
+const logger = createLogger('update todo')
+
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
     // DONE: Update a TODO item with the provided id using values in the "updatedTodo" object
+
+    logger.info(`Updating todo /lambda/http/updateTodo`, event)
 
     const userId = getUserId(event)
     const todoId = event.pathParameters.todoId

@@ -65,6 +65,9 @@ export class TodosAccess {
     }
 
     async updateTodo(updatedTodo: TodoUpdate, todoId: string, userId: string): Promise<String> {
+
+        logger.info(`Updating todo /todoAccess/updateTodo ${todoId}`)
+
         const params = {
             TableName: this.todosTable,
             Key: {
@@ -91,6 +94,9 @@ export class TodosAccess {
     }
 
     async deleteTodo(todoId: string, userId: string) {
+
+        logger.info(`Updating todo /todoAccess/deleteTodo ${todoId}`)
+
         const params = {
             TableName: this.todosTable,
             Key: {
