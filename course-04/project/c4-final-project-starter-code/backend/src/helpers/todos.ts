@@ -56,12 +56,9 @@ async function deleteTodo(todoId, userId) {
     return ""
 }
 
-async function createAttachmentPresignedUrl(todoId, userId) {
+async function createAttachmentPresignedUrl(todoId) {
 
-    const todo = await (new TodosAccess).getTodo(todoId)
-    if (todo.userId !== userId) {
-        throw new Error("User not authorized")
-    }
+    // const todo = await (new TodosAccess).getTodo(todoId, userId)
 
     const uploadUrl = (new FileStore).getPresignedUrl(todoId)
 

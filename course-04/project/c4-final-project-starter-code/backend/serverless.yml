@@ -127,6 +127,7 @@ functions:
       - http:
           method: put
           path: todos/{todoId}
+          cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true
     iamRoleStatements:
@@ -155,6 +156,7 @@ functions:
       - http:
           method: delete
           path: todos/{todoId}
+          cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true
     iamRoleStatements:
@@ -196,6 +198,12 @@ functions:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+      - Effect: Allow
+        Action:
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/${self:provider.environment.TODOS_CREATED_AT_INDEX}
       - Effect: Allow
         Action:
           - "xray:PutTraceSegments"
