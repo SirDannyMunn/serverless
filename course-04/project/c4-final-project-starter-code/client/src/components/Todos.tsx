@@ -17,6 +17,7 @@ import {
 import { createTodo, deleteTodo, getTodos, patchTodo } from '../api/todos-api'
 import Auth from '../auth/Auth'
 import { Todo } from '../types/Todo'
+import {AxiosError} from "axios";
 
 interface TodosProps {
   auth: Auth
@@ -96,7 +97,8 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         todos,
         loadingTodos: false
       })
-    } catch (e) {
+    } catch (err) {
+      const e = err as AxiosError
       alert(`Failed to fetch todos: ${e.message}`)
     }
   }
