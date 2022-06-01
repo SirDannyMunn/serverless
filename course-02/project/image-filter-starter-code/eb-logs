@@ -1,0 +1,141 @@
+(.ebcli-virtual-env) C:\Users\danie\Dev\tutorials\serverless\course-02\project\image-filter-starter-code\www>eb init --profile udacity-fs-cli
+
+Select a default region
+1) us-east-1 : US East (N. Virginia)
+2) us-west-1 : US West (N. California)
+3) us-west-2 : US West (Oregon)
+4) eu-west-1 : EU (Ireland)
+5) eu-central-1 : EU (Frankfurt)
+6) ap-south-1 : Asia Pacific (Mumbai)
+7) ap-southeast-1 : Asia Pacific (Singapore)
+8) ap-southeast-2 : Asia Pacific (Sydney)
+9) ap-northeast-1 : Asia Pacific (Tokyo)
+10) ap-northeast-2 : Asia Pacific (Seoul)
+11) sa-east-1 : South America (Sao Paulo)
+12) cn-north-1 : China (Beijing)
+13) cn-northwest-1 : China (Ningxia)
+14) us-east-2 : US East (Ohio)
+15) ca-central-1 : Canada (Central)
+16) eu-west-2 : EU (London)
+17) eu-west-3 : EU (Paris)
+18) eu-north-1 : EU (Stockholm)
+19) eu-south-1 : EU (Milano)
+20) ap-east-1 : Asia Pacific (Hong Kong)
+21) me-south-1 : Middle East (Bahrain)
+22) af-south-1 : Africa (Cape Town)
+(default is 3):
+
+
+Enter Application Name
+(default is "www"): udacity-fs
+Application udacity-fs has been created.
+
+It appears you are using Node.js. Is this correct?
+(Y/n): y
+Select a platform branch.
+1) Node.js 16 running on 64bit Amazon Linux 2
+2) Node.js 14 running on 64bit Amazon Linux 2
+3) Node.js 12 running on 64bit Amazon Linux 2 (Deprecated)
+4) Node.js 10 running on 64bit Amazon Linux 2 (Deprecated)
+5) Node.js running on 64bit Amazon Linux (Deprecated)
+(default is 1): 3
+
+Alert: You chose a deprecated platform branch. It might not be supported in the future.
+
+Cannot setup CodeCommit because there is no Source Control setup, continuing with initialization
+Do you want to set up SSH for your instances?
+(Y/n): y
+
+Type a keypair name.
+(Default is aws-eb):
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in C:\Users\danie\.ssh\aws-eb
+Your public key has been saved in C:\Users\danie\.ssh\aws-eb.pub
+The key fingerprint is:
+SHA256:4pONh+TrHYV4CUXeZ02f7HAGhEvuUOY8GjHAAok26UA aws-eb
+The key's randomart image is:
++---[RSA 3072]----+
+|.Eo.o .o+   oo.  |
+|.= . . + + = oo..|
+|+ .   o . @ +..=.|
+| .     o = O  =  |
+|      + S * .  . |
+|     + B o .     |
+|      B +        |
+|       = .       |
+|     .o .        |
++----[SHA256]-----+
+WARNING: Uploaded SSH public key for "aws-eb" into EC2 for region us-west-2.
+
+
+
+
+(.ebcli-virtual-env) C:\Users\danie\Dev\tutorials\serverless\course-02\project\image-filter-starter-code\www>eb create
+Alert: You chose a deprecated platform branch. It might not be supported in the future.
+
+Enter Environment Name
+(default is udacity-fs-dev):
+Enter DNS CNAME prefix
+(default is udacity-fs-dev):
+
+Select a load balancer type
+1) classic
+2) application
+3) network
+(default is 2): 2
+
+
+Would you like to enable Spot Fleet requests for this environment? (y/N): n
+
+2.0+ Platforms require a service role. We will attempt to create one for you. You can specify your own role using the --service-role option.
+Type "view" to see the policy, or just press ENTER to continue:
+Creating application version archive "app-220601_152823038236".
+Uploading udacity-fs/app-220601_152823038236.zip to S3. This may take a while.
+Upload Complete.
+Environment details for: udacity-fs-dev
+  Application name: udacity-fs
+  Region: us-west-2
+  Deployed Version: app-220601_152823038236
+  Environment ID: e-zsjjzyjx3e
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Node.js 12 running on 64bit Amazon Linux 2/5.5.3
+  Tier: WebServer-Standard-1.0
+  CNAME: udacity-fs-dev.us-west-2.elasticbeanstalk.com
+  Updated: 2022-06-01 14:28:28.085000+00:00
+Alert: Your environment is using a deprecated platform branch. It might not be supported in the future.
+
+Printing Status:
+2022-06-01 14:28:26    INFO    createEnvironment is starting.
+2022-06-01 14:28:28    INFO    Using elasticbeanstalk-us-west-2-152410910815 as Amazon S3 storage bucket for environment data.
+2022-06-01 14:28:55    INFO    Created target group named: arn:aws:elasticloadbalancing:us-west-2:152410910815:targetgroup/awseb-AWSEB-MH9UHOTIOPGH/853bf62436296952
+2022-06-01 14:28:55    INFO    Created security group named: sg-0df07e11d1926fd93
+2022-06-01 14:29:10    INFO    Created security group named: awseb-e-zsjjzyjx3e-stack-AWSEBSecurityGroup-ZCK6B0HL6UIY
+2022-06-01 14:29:10    INFO    Created Auto Scaling launch configuration named: awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingLaunchConfiguration-MQldfiwE0vmm
+2022-06-01 14:30:28    INFO    Created Auto Scaling group named: awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingGroup-X6QTHI79RMB2
+2022-06-01 14:30:28    INFO    Waiting for EC2 instances to launch. This may take a few minutes.
+2022-06-01 14:30:28    INFO    Created Auto Scaling group policy named: arn:aws:autoscaling:us-west-2:152410910815:scalingPolicy:368648ac-fe90-45e1-8ef5-25ad05634ac9:autoScalingGroupName/awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingGroup-X6QTHI79RMB2:policyName/awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingScaleDownPolicy-1SGTT0SQHE10I
+2022-06-01 14:30:28    INFO    Created Auto Scaling group policy named: arn:aws:autoscaling:us-west-2:152410910815:scalingPolicy:1113d096-5018-4655-8e53-f51563235749:autoScalingGroupName/awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingGroup-X6QTHI79RMB2:policyName/awseb-e-zsjjzyjx3e-stack-AWSEBAutoScalingScaleUpPolicy-OOBAON8W6DF
+2022-06-01 14:30:28    INFO    Created CloudWatch alarm named: awseb-e-zsjjzyjx3e-stack-AWSEBCloudwatchAlarmLow-NUT8XJRFWVL5
+2022-06-01 14:30:28    INFO    Created CloudWatch alarm named: awseb-e-zsjjzyjx3e-stack-AWSEBCloudwatchAlarmHigh-V3CJ0EQN5DB9
+2022-06-01 14:30:28    INFO    Created load balancer named: arn:aws:elasticloadbalancing:us-west-2:152410910815:loadbalancer/app/awseb-AWSEB-8NJQM69NX3K7/53ea63ad25e5fdff
+2022-06-01 14:30:31    INFO    Created Load Balancer listener named: arn:aws:elasticloadbalancing:us-west-2:152410910815:listener/app/awseb-AWSEB-8NJQM69NX3K7/53ea63ad25e5fdff/7e9d11b7212c2a02
+2022-06-01 14:30:51    INFO    Instance deployment: You didn't specify a Node.js version in the 'package.json' file in your source bundle. The deployment didn't install a specific Node.js version.
+2022-06-01 14:31:05    INFO    Instance deployment completed successfully.
+2022-06-01 14:31:37    INFO    Application available at udacity-fs-dev.us-west-2.elasticbeanstalk.com.
+2022-06-01 14:31:38    INFO    Successfully launched environment: udacity-fs-dev
+
+
+
+(.ebcli-virtual-env) C:\Users\danie\Dev\tutorials\serverless\course-02\project\image-filter-starter-code\www>eb deploy
+Alert: Your environment is using a deprecated platform branch. It might not be supported in the future.
+
+Creating application version archive "app-220601_154514870681".
+Uploading udacity-fs/app-220601_154514870681.zip to S3. This may take a while.
+Upload Complete.
+2022-06-01 14:45:17    INFO    Environment update is starting.
+2022-06-01 14:45:21    INFO    Deploying new version to instance(s).
+2022-06-01 14:45:24    INFO    Instance deployment: You didn't specify a Node.js version in the 'package.json' file in your source bundle. The deployment didn't install a specific Node.js version.
+2022-06-01 14:45:36    INFO    Instance deployment completed successfully.
+2022-06-01 14:45:39    INFO    New application version was deployed to running EC2 instances.
+2022-06-01 14:45:39    INFO    Environment update completed successfully.
