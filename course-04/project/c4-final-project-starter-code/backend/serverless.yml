@@ -98,9 +98,16 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+#          request:
+#            schemas:
+#              application/json: ${file(models/create-todo-model.json)}
           request:
-            schemas:
+            schema:
               application/json: ${file(models/create-todo-model.json)}
+#              application/json:
+#                name: CreateTodoSchema
+#                description: 'Validation for creating todos'
+#                schema: ${file(models/create-todo-model.json)}
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
@@ -129,6 +136,13 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          request:
+            schema:
+              application/json: ${file(models/update-todo-model.json)}
+#              application/json:
+#                name: UpdateTodoSchema
+#                description: 'Validation for updating todos'
+#                schema: ${file(models/update-todo-model.json)}
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
